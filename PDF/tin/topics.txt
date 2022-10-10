@@ -1,0 +1,115 @@
+﻿Arithmetic (số học):
+   Linear Diophantine equation (Phương trình nghiệm nguyên)
+   Gauss elimination (khử Gauss)
+   Inverse modulo (nghich đảo modulo)
+   Combinatorics (các kỹ thuật tính tổ hợp)
+   Prime sieve (sàng nguyên tố)
+   Probability (xác suất)
+
+Backtrack (quay lui):
+    Parital memoization (nhớ một phần)
+    Divide by half (duyệt phân đôi tập)
+    Iterative deepening (duyệt theo độ sâu)
+
+BFS (Loang):
+    Paralell bfs (Loang song song)
+    Layer-by-layer bfs (Loang theo lớp)
+
+DFS:
+    Cut vertexes, bridges (Khớp và cầu)
+    Properties of dfs-visit-time (một số tính chất của cây DFS)
+    Tarjan algorithm (thuật toán liên thông mạnh)
+    2-SAT (bài toán 2-SAT)
+    Euler tour (đường đi Euler)
+
+Shortest Path (đường đi ngắn nhất):
+    Dijkstra
+    Bellman-Ford
+    Floyd
+
+Matching (cặp ghép):
+    Edmonds (cặp ghép BFS)
+    fastMatch (cặp ghép nhanh bằng DFS)
+    Hungarian algorithm (cặp ghép có trọng số)
+
+Flow (Luồng):
+    maxFlow Edmonds-Karp
+    maxFlow Dinic
+    minFlow (luồng với thông lượng âm)
+    minCost-maxFlow (luồng mincost)
+
+Minimum Spanning Tree (cây khung nhỏ nhất):
+    Kruskal
+    Prim
+    Second MST (cây khung nhỏ nhì)
+
+Game (thuật toán trò chơi):
+    Nim
+    Sprague-grundy
+
+Data structures (cấu trúc dữ liệu):
+    Queue
+    Deque
+    Stack
+    Linked list
+
+    Big Integer (số lớn)
+
+    Disjoint set union (DSU)
+
+    Heap:
+        min-max Heap
+        dynamic median (quản lí trung vị)
+        linear heap for dijsktra (Heap nhanh cho dijsktra)
+
+    BIT (Binary Indexed Tree):
+        multi-dimensional (BIT đa chiều)
+        persistent
+        compressed (BIT nén)
+        maintaining polynomials (BIT quản lí đa thức)
+
+    Segment tree (Interval Tree):
+        multi-dimensional with BST (Kết hợp với BST)
+        persistent
+        dynamic allocation (IT cấp phát động)
+        lazy propagation (cập nhật lazy)
+
+    Balanced Binary Search Tree (cây nhị phân tìm kiếm tự cân bằng):
+        Splay tree
+        Treap
+
+    Queries on tree (truy vấn trên cây):
+        LCA
+        Heavy-Light decompostion
+        Centroid decomposition
+
+SQRT decomposition:
+    Blocks split
+    Mo's algorithm
+    Delay buffer (lazy update)
+
+Dynamic programming (Quy hoạch động):
+    DP bitmask (quản lí trạng thái bằng số nhị phân)
+    DP by digits (QHĐ theo chữ số)
+    DP lexical (QHĐ thứ tự từ điển)
+    DP on tree (QHĐ trên cây)
+    DP win-lose (game)
+    DP on DAG (QHĐ trên DAG)
+    Matrix exponentiation (Tính nhanh bằng nhân ma trận)
+    Sparse-table, RMQ (Mảng thưa)
+    DP optimizations (Tối ưu QHĐ):
+        Convex hull trick (QHĐ bao lồi)
+        Range tree (QHĐ kết hợp cây quản lí đoạn)
+        Divide and conquer opt (tối ưu bằng chia để trị)
+
+Geometry (Hình học):
+    Convex hull (Bao lồi)
+    Sweep-line
+
+String algorithm (thuật toán quản lí-xử lí xâu):
+    KMP
+    Z-function
+    Trie
+    Aho-Corasick
+    Polynomial hash
+    Suffix structures (cấu trúc dữ liệu hậu tố)
