@@ -1,24 +1,25 @@
-#include<iostream>
-#include<iomanip>
-#include<vector>
-#include<cassert>
+#include <cassert>
+#include <iomanip>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 typedef vector<int> bigint;
 // UNSIGNED
-const int BASE=1e9,LEN=9;
+const int BASE = 1e9, LEN = 9;
 
-void fix(bigint &a) {
+void fix(bigint& a) {
     a.push_back(0);
     for (int i = 0; i < a.size() - 1; ++i) {
         a[i + 1] += a[i] / BASE;
         a[i] %= BASE;
         if (a[i] < 0) a[i] += BASE, a[i + 1]--;
     }
-    while (a.size() > 1 && a.back() == 0) a.pop_back();
+    while (a.size() > 1 && a.back() == 0)
+        a.pop_back();
 }
 
-bigint operator*(const bigint &a, const bigint &b) {
+bigint operator*(const bigint& a, const bigint& b) {
     bigint c(a.size() + b.size() + 1);
     for (int i = 0; i < a.size(); ++i)
         for (int j = 0; j < b.size(); ++j) {
@@ -34,13 +35,13 @@ bigint to_bigint(int x) {  // x < Base
     return bigint(1, x);
 }
 
-bigint operator+(bigint a, const bigint &b) {
+bigint operator+(bigint a, const bigint& b) {
     a.resize(max(a.size(), b.size()));
     for (int i = 0; i < b.size(); ++i)
         a[i] += b[i];
     return fix(a), a;
 }
-bigint operator-(bigint a, const bigint &b) {
+bigint operator-(bigint a, const bigint& b) {
     for (int i = 0; i < b.size(); ++i)
         a[i] -= b[i];
     return fix(a), a;
@@ -52,7 +53,7 @@ bigint operator*(bigint a, int x) {  // x < BASE
     return fix(a), a;
 }
 
-bool operator<(const bigint &a, const bigint &b) {
+bool operator<(const bigint& a, const bigint& b) {
     if (a.size() != b.size()) return a.size() < b.size();
     for (int i = a.size() - 1; i >= 0; i--)
         if (a[i] != b[i]) return a[i] < b[i];
@@ -67,14 +68,14 @@ bigint operator/(bigint a, int x) {  // x < BASE
     }
     return fix(a), a;
 }
-int operator%(const bigint &a, int x) {  //x < BASE
+int operator%(const bigint& a, int x) {  // x < BASE
     int r = 0;
     for (int i = (int)a.size() - 1; i >= 0; --i)
         r = (r * BASE + a[i]) % x;
     return r;
 }
 
-istream &operator>>(istream &cin, bigint &a) {
+istream& operator>>(istream& cin, bigint& a) {
     string s;
     cin >> s;
     a.clear();
@@ -86,7 +87,7 @@ istream &operator>>(istream &cin, bigint &a) {
     return fix(a), cin;
 }
 
-ostream &operator<<(ostream &os, const bigint &a) {
+ostream& operator<<(ostream& os, const bigint& a) {
     os << a.back();
     for (int i = (int)a.size() - 2; i >= 0; i--)
         os << setw(LEN) << setfill('0') << a[i];

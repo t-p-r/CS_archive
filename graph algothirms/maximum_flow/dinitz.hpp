@@ -1,24 +1,25 @@
-#include<vector>
-#include<queue>
-#include<tuple>
+#include <queue>
+#include <tuple>
+#include <vector>
 using namespace std;
-using ii=pair<int,int>;
+using ii = pair<int, int>;
 
 struct dinitz_impl {
     vector<vector<ii>> adj;  // adjacency list
     vector<int> cap, flow;   // capacity and current flow through each edge
-    vector<int> d;           // height of node after performing BFS in residual graph
-    vector<int> num;         // used to denote current augmenting path
+    vector<int> d;    // height of node after performing BFS in residual graph
+    vector<int> num;  // used to denote current augmenting path
     vector<int> pos;
-    // heuristical array, used so that no two augmenting path of the same residual graph shares an edge
+    // heuristical array, used so that no two augmenting path of the same
+    // residual graph shares an edge
 
     int start, dest;  // source and sink of the flow network
-    int t = 0;        // index of the current augmenting path, used along with the num[] array
+    int t = 0;  // index of the current augmenting path, used along with the
+                // num[] array
     int edge_count = 0;
-    // Note: every main edge (u,v) whose index is 2*x have its back-edge (v,u) indexed 2*x+1
-    // (see the add_edge() function).
-    // This trivializes the act of finding the index of the reverse edge, that is
-    // index(u,v) = index(v,u)^1.
+    // Note: every main edge (u,v) whose index is 2*x have its back-edge (v,u)
+    // indexed 2*x+1 (see the add_edge() function). This trivializes the act of
+    // finding the index of the reverse edge, that is index(u,v) = index(v,u)^1.
 
     dinitz_impl() {}
     dinitz_impl(int n, int m, int start, int dest)
@@ -39,8 +40,8 @@ struct dinitz_impl {
         edge_count += 2;
     }
 
-    // Attempt to construct the residual graph. Return true if that graph reaches t
-    // (i.e an augmenting path exists).
+    // Attempt to construct the residual graph. Return true if that graph
+    // reaches t (i.e an augmenting path exists).
     bool bfs(int s, int t) {
         fill(d.begin(), d.end(), 0);
         queue<int> q;
@@ -50,8 +51,7 @@ struct dinitz_impl {
         while (q.size()) {
             int u = q.front();
             q.pop();
-            if (u == t)
-                return true;
+            if (u == t) return true;
 
             for (const ii& k : adj[u]) {
                 int v = k.first, uv = k.second;
@@ -63,8 +63,7 @@ struct dinitz_impl {
     }
 
     int dfs(int u, int cur_flow) {
-        if (u == dest)
-            return cur_flow;
+        if (u == dest) return cur_flow;
         if (num[u] != t)
             num[u] = t;
         else
@@ -77,8 +76,7 @@ struct dinitz_impl {
 
             if (flow[uv] < cap[uv] && num[v] != t && d[v] == d[u] + 1) {
                 int x = dfs(v, min(cur_flow, cap[uv] - flow[uv]));
-                if (x)
-                    return flow[uv] += x, flow[vu] -= x, x;
+                if (x) return flow[uv] += x, flow[vu] -= x, x;
             }
         }
 

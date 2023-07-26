@@ -1,7 +1,7 @@
 // to find the geometric median of n points
 // header files for IO functions and math
-#include <cstdio>
 #include <cmath>
+#include <cstdio>
 
 // the maximul value n can take
 const int maxn = 50001;
@@ -11,15 +11,15 @@ const int maxn = 50001;
 const int dx[] = {-1, 0, 1, 0};
 const int dy[] = {0, 1, 0, -1};
 
-// controls the precision - this should give you an answer accurate to 3 decimals
+// controls the precision - this should give you an answer accurate to 3
+// decimals
 const double eps = 0.001;
 
 // input and output files
-FILE *in = fopen("adapost2.in","r"), *out = fopen("adapost2.out","w");
+FILE *in = fopen("adapost2.in", "r"), *out = fopen("adapost2.out", "w");
 
 // stores a point in 2d space
-struct punct
-{
+struct punct {
     double x, y;
 };
 
@@ -33,67 +33,63 @@ punct a[maxn];
 double x, y;
 
 // finds the sum of (euclidean) distances from each input point to (x, y)
-double dist(double x, double y)
-{
+double dist(double x, double y) {
     double ret = 0;
 
-    for ( int i = 1; i <= n; ++i )
-    {
+    for (int i = 1; i <= n; ++i) {
         double dx = a[i].x - x;
         double dy = a[i].y - y;
 
-        ret += sqrt(dx*dx + dy*dy); // classical distance formula
+        ret += sqrt(dx * dx + dy * dy);  // classical distance formula
     }
 
     return ret;
 }
 
 // reads the input
-void read()
-{
-    fscanf(in, "%d", &n); // read n from the first 
+void read() {
+    fscanf(in, "%d", &n);  // read n from the first
 
     // read n points next, one on each line
-    for ( int i = 1; i <= n; ++i )
-        fscanf(in, "%lf %lf", &a[i].x, &a[i].y), // reads a point
-        x += a[i].x,
-        y += a[i].y; // we add the x and y at first, because we will start by approximating the answer as the center of gravity
+    for (int i = 1; i <= n; ++i)
+        fscanf(in, "%lf %lf", &a[i].x, &a[i].y),  // reads a point
+            x += a[i].x,
+            y +=
+            a[i].y;  // we add the x and y at first, because we will start by
+                     // approximating the answer as the center of gravity
 
     // divide by the number of points (n) to get the center of gravity
-    x /= n; 
+    x /= n;
     y /= n;
 }
 
 // implements the solving algorithm
-void go()
-{
+void go() {
     // start by finding the sum of distances to the center of gravity
     double d = dist(x, y);
 
     // our step value, chosen by experimentation
     double step = 100.0;
 
-    // done is used to keep track of updates: if none of the neighbors of the current
-    // point that are *step* steps away improve the solution, then *step* is too big
-    // and we need to look closer to the current point, so we must half *step*.
+    // done is used to keep track of updates: if none of the neighbors of the
+    // current point that are *step* steps away improve the solution, then
+    // *step* is too big and we need to look closer to the current point, so we
+    // must half *step*.
     int done = 0;
 
     // while we still need a more precise answer
-    while ( step > eps )
-    {
+    while (step > eps) {
         done = 0;
-        for ( int i = 0; i < 4; ++i )
-        {
+        for (int i = 0; i < 4; ++i) {
             // check the neighbors in all 4 directions.
-            double nx = (double)x + step*dx[i];
-            double ny = (double)y + step*dy[i];
+            double nx = (double)x + step * dx[i];
+            double ny = (double)y + step * dy[i];
 
             // find the sum of distances to each neighbor
             double t = dist(nx, ny);
 
             // if a neighbor offers a better sum of distances
-            if ( t < d )
-            {
+            if (t < d) {
                 // update the current minimum
                 d = t;
                 x = nx;
@@ -109,13 +105,11 @@ void go()
 
         // half the step size, because no update has been made, so we might have
         // jumped too much, and now we need to head back some.
-        if ( !done )
-            step /= 2;
+        if (!done) step /= 2;
     }
 }
 
-int main()
-{
+int main() {
     read();
     go();
 
