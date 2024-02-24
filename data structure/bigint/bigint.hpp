@@ -46,17 +46,21 @@ class big_integer : private basic_string<T> {
     friend big_integer operator-(big_integer a) { return a.sign ^= 1, a; }
 
     friend int comp(const big_integer& a, const big_integer& b) {
-        if (a.sign != b.sign) return a.sign < b.sign ? -1 : 1;
+        if (a.sign != b.sign)
+            return a.sign < b.sign ? -1 : 1;
         if (a.size() != b.size())
             return (a.size() - b.size()) * (a.sign ? 1 : -1);
         for (int i = a.size() - 1; i >= 0; i--)
-            if (a[i] != b[i]) return (a[i] - b[i]) * (a.sign ? 1 : -1);
+            if (a[i] != b[i])
+                return (a[i] - b[i]) * (a.sign ? 1 : -1);
         return 0;
     }
 
     friend ostream& operator<<(ostream& os, const big_integer& a) {
-        if (a.empty()) return os << "0";
-        if (!a.sign) os << '-';
+        if (a.empty())
+            return os << "0";
+        if (!a.sign)
+            os << '-';
         os << a.back();
         for (int i = a.size() - 2; i >= 0; i--)
             os << setw(len) << setfill('0') << a[i];
@@ -71,9 +75,11 @@ class big_integer : private basic_string<T> {
     }
 
     friend string to_string(const big_integer& a) {
-        if (a.empty()) return "0";
+        if (a.empty())
+            return "0";
         stringstream ss;
-        if (!a.sign) ss << '-';
+        if (!a.sign)
+            ss << '-';
         ss << a.back();
         for (int i = a.size() - 2; i >= 0; i--)
             ss << setw(len) << setfill('0') << a[i];
@@ -96,8 +102,10 @@ class big_integer : private basic_string<T> {
     }
 
     friend big_integer operator+(const big_integer& a, const big_integer& b) {
-        if (a.sign && !b.sign) return a - (-b);
-        if (!a.sign && b.sign) return b - (-a);
+        if (a.sign && !b.sign)
+            return a - (-b);
+        if (!a.sign && b.sign)
+            return b - (-a);
         big_integer res = a;
         res.resize(max(a.size(), b.size()));
         for (int i = 0; i < b.size(); i++)
@@ -107,9 +115,12 @@ class big_integer : private basic_string<T> {
     }
 
     friend big_integer operator-(const big_integer& a, const big_integer& b) {
-        if (a.sign && !b.sign) return a + (-b);
-        if (!a.sign && b.sign) return -(b + (-a));
-        if (!a.sign && !b.sign) return -((-a) - (-b));
+        if (a.sign && !b.sign)
+            return a + (-b);
+        if (!a.sign && b.sign)
+            return -(b + (-a));
+        if (!a.sign && !b.sign)
+            return -((-a) - (-b));
         if (a > b) {
             big_integer res = a;
             for (int i = 0; i < b.size(); i++)

@@ -1,3 +1,3 @@
 # CS_archive
 
-This is where I keep my code (snippets) for regularly used data structures and algorithms. A barebone ICPC notebook, if you will.
+Archive of mostly self-written data structures and algorithms I've using since 2019. Some are being migrated to [CPDSA](https://github.com/t-p-r/cpdsa).

@@ -14,7 +14,7 @@ class ordered_set {
         node *lid, *rid;
     };
     node* root = new node();
-
+    
     inline void create_node(node* par, int dir) {
         if (dir == 0)
             par->lid = new node();
